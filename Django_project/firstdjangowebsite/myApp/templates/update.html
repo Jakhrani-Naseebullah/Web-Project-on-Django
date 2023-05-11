@@ -1,0 +1,188 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Product</title>
+    <link
+      href="{% static 'css/style.css' %}"
+      type="text/css"
+      rel="stylesheet"
+    />
+    <link href="{% static 'css/grid.css' %}" type="text/css" rel="stylesheet" />
+    <script src="{% static 'contact.js' %}"></script>
+
+    <style>
+      /* CSS for responsive form */
+      form {
+        max-width: 500px;
+        margin: 0 auto;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      input[type="text"],
+      input[type="number"],
+      textarea,
+      select {
+        width: 100%;
+        padding: 5px;
+        margin-bottom: 10px;
+      }
+
+      button {
+        padding: 10px 20px;
+        margin-right: 5px;
+      }
+
+      /* CSS for error styles */
+      .error {
+        border: 1px solid red;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <!-------------------- header ------------------->
+
+      <header>
+        <div>
+          <h1 style="margin-left: 256px">
+            <a href="{% url 'home' %}"
+              ><img src="{% static 'images/logo.png'%}"
+            /></a>
+          </h1>
+          <nav>
+            <ul class="menu">
+              <li><a href="{% url 'home' %}">Home</a></li>
+              <li><a href="{% url 'about' %}">About</a></li>
+              <li><a href="{% url 'contact' %}">contact us</a></li>
+              <li><a href="{% url 'list_of_product' %}">Product List</a></li>
+              <li class="current">
+                <a href="{% url 'product' %}">Add Products</a>
+              </li>
+              <li><a href="{% url 'logout' %}">logout</a></li>
+            </ul>
+          </nav>
+          <div class="clear"></div>
+        </div>
+      </header>
+
+      <!-------------------- slider ------------------->
+
+      <form id="productForm" method="post" action="{% url 'updated_product' %}">
+        {% csrf_token %}
+        <input type="hidden" name="id" value="{{ id }}" />
+        <div>
+          <label for="productName">Product Name:</label>
+          <input
+            type="text"
+            id="productName"
+            name="productName"
+            value="{{ product_name }}"
+            required
+          />
+        </div>
+        <div>
+          <label for="category">Category:</label>
+          <input
+            type="text"
+            id="category"
+            name="category"
+            value="{{ category }}"
+            required
+          />
+        </div>
+        <div>
+          <label for="subcategory">Subcategory:</label>
+          <input
+            type="text"
+            id="subcategory"
+            name="subcategory"
+            value="{{ subcategory }}"
+            required
+          />
+        </div>
+        <div>
+          <label for="price">Price:</label>
+          <input
+            type="number"
+            id="price"
+            name="price"
+            value="{{ price }}"
+            min="0"
+            step="0.01"
+            required
+          />
+        </div>
+        <div>
+          <label for="description">Description:</label>
+          <textarea id="description" name="description" required>
+{{ desc }}</textarea
+          >
+        </div>
+        <div>
+          <label for="publishDate">Publish Date:</label>
+          <input
+            type="date"
+            id="publishDate"
+            name="publishDate"
+            value="{{ pub_date }}"
+            required
+          />
+        </div>
+        <div>
+          <label for="image">Image:</label>
+          <input
+            type="file"
+            id="image"
+            name="image"
+            accept="image/*"
+            required
+          />
+        </div>
+        <br />
+        <div>
+          <button
+            type="submit"
+            style="background: blue; border: none; border-radius: 4px"
+          >
+            Update
+          </button>
+          <a href="{% url 'list_of_product' %}"
+            ><button
+              style="background: red; border: none; border-radius: 4px"
+              type="button"
+              id="cancelBtn"
+            >
+              Cancel
+            </button></a
+          >
+        </div>
+      </form>
+
+      <!-------------------- footer ------------------->
+
+      <footer>
+        <p>
+          &copy; 2012 Start-Up<br />
+          <a href="#" class="link">Website </a> by Naseebullah Jakhrani<br />
+          <a href="#" class="link">Web Project</a> by
+          <a href="#">Naseebullah Jakhrani</a>
+        </p>
+
+        <div class="social-icons">
+          <span>Follow us:</span>
+          <a href="http://wwww.twitter.com"
+            ><img src="{% static 'images/icon-1.jpg' %}"
+          /></a>
+          <a href="#"><img src="{% static 'images/icon-2.jpg' %}" /></a>
+          <a href="#"><img src="{% static 'images/icon-3.jpg' %}" /></a>
+        </div>
+      </footer>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,182 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Registration</title>
+    <link
+      href="{% static 'css/style.css' %}"
+      type="text/css"
+      rel="stylesheet"
+    />
+    <link href="{% static 'css/grid.css' %}" type="text/css" rel="stylesheet" />
+    <script src="{% static 'contact.js' %}"></script>
+  </head>
+  <style>
+    .loginheader {
+      margin: 30;
+      padding: 0;
+    }
+
+    .loginheader {
+      text-align: center;
+      font-size: 31px;
+      line-height: 40px;
+      color: #000;
+      font-weight: normal;
+      font-family: bilbo;
+    }
+
+    form {
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    input {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      width: 100%;
+    }
+
+    .error {
+      color: red;
+      font-size: 12px;
+      margin-top: 5px;
+      display: block;
+    }
+
+    button[type="submit"] {
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 5px;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+
+    @media only screen and (max-width: 768px) {
+      form {
+        max-width: 100%;
+        padding: 0 20px;
+      }
+    }
+  </style>
+  <body>
+    <main>
+      <!-------------------- header ------------------->
+
+      <header>
+        <div>
+          <h1>
+            <a href="home"><img src="{% static 'images/logo.png' %}" /></a>
+          </h1>
+
+          <div class="clear"></div>
+        </div>
+      </header>
+
+      <!-------------------- content ------------------->
+      <h2 class="loginheader">Register Here</h2>
+      <form id="registration-form" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="first_name">First Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="first_name"
+            name="first_name"
+          />
+          <span id="first-name-error" class="error"></span>
+        </div>
+        <div class="form-group">
+          <label for="last_name">Last Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="last_name"
+            name="last_name"
+          />
+          <span id="last-name-error" class="error"></span>
+        </div>
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input
+            type="text"
+            class="form-control"
+            id="username"
+            name="username"
+          />
+          <span id="username-error" class="error"></span>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" id="email" name="email" />
+          <span id="email-error" class="error"></span>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            name="password"
+          />
+          <span id="password-error" class="error"></span>
+        </div>
+        <div class="form-group">
+          <label for="confirm_password">Confirm Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="confirm_password"
+            name="confirm_password"
+          />
+          <span id="confirm-password-error" class="error"></span>
+        </div>
+        <a
+          href="{% url 'login' %}"
+          style="color: black; text-decoration: underline"
+          >I have already account</a
+        ><br />
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+      <!-------------------- footer ------------------->
+
+      <footer>
+        <p>
+          &copy; 2012 Start-Up<br />
+          <a href="#" class="link">Website </a> by Naseebullah Jakhrani<br />
+          <a href="#" class="link">Web Project</a> by
+          <a href="#">Naseebullah Jakhrani</a>
+        </p>
+
+        <div class="social-icons">
+          <span>Follow us:</span>
+          <a href="http://wwww.twitter.com"
+            ><img src="{% static 'images/icon-1.jpg' %}"
+          /></a>
+          <a href="#"><img src="{% static 'images/icon-2.jpg' %}" /></a>
+          <a href="#"><img src="{% static 'images/icon-3.jpg' %}" /></a>
+        </div>
+      </footer>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,173 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>List Of Product</title>
+    <link
+      href="{% static 'css/style.css' %}"
+      type="text/css"
+      rel="stylesheet"
+    />
+    <link href="{% static 'css/grid.css' %}" type="text/css" rel="stylesheet" />
+    <script src="{% static 'contact.js' %}"></script>
+
+    <style>
+      /* CSS styling for the table */
+      .product-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .product-table th,
+      .product-table td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .product-table th {
+        background-color: #f2f2f2;
+        color: #333;
+        font-weight: bold;
+      }
+
+      .product-actions {
+        display: flex;
+        justify-content: space-around;
+      }
+
+      /* Media query for responsive table */
+      @media only screen and (max-width: 600px) {
+        .product-table {
+          border-collapse: separate;
+          border-spacing: 0;
+        }
+
+        .product-table td,
+        .product-table th {
+          display: block;
+          padding: 8px;
+        }
+
+        .product-table tr {
+          border-bottom: 1px solid #ddd;
+        }
+
+        .product-actions {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <!-------------------- header ------------------->
+
+      <header>
+        <div>
+          <h1 style="margin-left: 256px">
+            <a href="{% url 'home' %}"
+              ><img src="{% static 'images/logo.png'%}"
+            /></a>
+          </h1>
+          <nav>
+            <ul class="menu">
+              <li><a href="{% url 'home' %}">Home</a></li>
+              <li><a href="{% url 'about' %}">About</a></li>
+              <li><a href="{% url 'contact' %}">contact us</a></li>
+              <li class="current">
+                <a href="{% url 'list_of_product' %}">Product List</a>
+              </li>
+              <li><a href="{% url 'product' %}">Add Products</a></li>
+              <li><a href="{% url 'logout' %}">logout</a></li>
+            </ul>
+          </nav>
+          <div class="clear"></div>
+        </div>
+      </header>
+
+      <!-------------------- slider ------------------->
+      <table class="product-table">
+        <thead>
+          <tr>
+            <th>product_id</th>
+            <th>Product Name</th>
+            <th>Category</th>
+            <th>Subcategory</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Publish Date</th>
+            <th>Image</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for product in data %}
+          <tr>
+            <td>{{ product.product_id }}</td>
+            <td>{{ product.product_name }}</td>
+            <td>{{ product.category }}</td>
+            <td>{{ product.subcategory }}</td>
+            <td>{{ product.price }}</td>
+            <td>{{ product.desc }}</td>
+            <td>{{ product.pub_date }}</td>
+            <td>
+              <img
+                src="{{ product.image.url }}"
+                alt="{{ product.product_name }}"
+                width="50"
+              />
+            </td>
+            <td class="product-actions">
+              <a href="/update_product?id={{product.product_id}}"
+                ><button
+                  style="
+                    padding: 13px;
+                    background: green;
+                    border: none;
+                    border-radius: 6px;
+                  "
+                >
+                  Edit
+                </button></a
+              >
+              <a href="/delete_product?id={{product.product_id}}"
+                ><button
+                  style="
+                    padding: 13px;
+                    background: red;
+                    border: none;
+                    border-radius: 6px;
+                  "
+                >
+                  Delete
+                </button></a
+              >
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <!-------------------- footer ------------------->
+
+      <footer>
+        <p>
+          &copy; 2012 Start-Up<br />
+          <a href="#" class="link">Website </a> by Naseebullah Jakhrani<br />
+          <a href="#" class="link">Web Project</a> by
+          <a href="#">Naseebullah Jakhrani</a>
+        </p>
+
+        <div class="social-icons">
+          <span>Follow us:</span>
+          <a href="http://wwww.twitter.com"
+            ><img src="{% static 'images/icon-1.jpg' %}"
+          /></a>
+          <a href="#"><img src="{% static 'images/icon-2.jpg' %}" /></a>
+          <a href="#"><img src="{% static 'images/icon-3.jpg' %}" /></a>
+        </div>
+      </footer>
+    </main>
+  </body>
+</html>
